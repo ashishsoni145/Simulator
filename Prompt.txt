@@ -1,0 +1,1197 @@
+Build a Futuristic Interactive 3D Science Learning Platform
+
+Build a premium educational web application called Science 3D — an interactive 3D learning platform for Class 11 and Class 12 Physics and Chemistry, focused on learning concepts through simulations, experiments, visualizations, and interactive 3D artifacts rather than static notes.
+
+The final product should feel like a combination of:
+
+- A futuristic virtual science laboratory
+- PhET-style interactive simulations
+- A premium modern education platform
+- A 3D scientific visualization tool
+- A game-like exploration experience
+- An AI-powered learning assistant
+
+This must look like a real startup-quality product, not a generic educational dashboard.
+
+---
+
+1. TECH STACK
+
+Use:
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Three.js
+- React Three Fiber
+- @react-three/drei
+- OGL
+- Lucide React icons
+- Framer Motion where appropriate
+
+Use a clean component architecture.
+
+The application must be responsive and work well on:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+Prioritize performance because the application will eventually contain many WebGL/3D simulations.
+
+---
+
+2. BRAND / PRODUCT IDENTITY
+
+Product name:
+
+Science 3D
+
+Possible tagline:
+
+"See the science. Interact with it. Understand it."
+
+Alternative supporting copy:
+
+"Your interactive laboratory for Physics & Chemistry."
+
+The visual identity should communicate:
+
+- Science
+- Space
+- Technology
+- Precision
+- Discovery
+- Intelligence
+- Education
+
+Avoid making it look like a children's science website.
+
+The target audience is:
+
+- Class 11 students
+- Class 12 students
+- CBSE students
+- JEE/NEET aspirants
+- Teachers
+- Curious science learners
+
+---
+
+3. GLOBAL VISUAL DESIGN
+
+Create an extremely modern dark futuristic interface.
+
+Primary visual direction:
+
+Dark space laboratory + glassmorphism + scientific HUD + premium SaaS UI
+
+Use:
+
+- Near-black backgrounds
+- Deep navy/black gradients
+- Glass panels
+- Subtle borders
+- Soft blue/violet/cyan accents
+- Subtle glow
+- Large typography
+- Generous spacing
+- Rounded cards
+- Fine grid patterns
+- Scientific UI details
+- Smooth micro-interactions
+
+Do NOT overuse gradients.
+
+Do NOT make every element glow.
+
+The UI should remain readable and sophisticated.
+
+Use glow primarily for:
+
+- Active states
+- Buttons
+- Important scientific objects
+- Simulation indicators
+- Hover states
+- Navigation highlights
+
+---
+
+4. GALAXY BACKGROUND
+
+Integrate the React Bits Galaxy component as a major part of the visual identity.
+
+Use the JavaScript + CSS version of the Galaxy component with the "ogl" dependency.
+
+Install:
+
+npm install ogl
+
+Create:
+
+src/components/Galaxy/Galaxy.jsx
+src/components/Galaxy/Galaxy.css
+
+Use the supplied Galaxy component source exactly as the implementation basis.
+
+Import it where needed:
+
+import Galaxy from "./components/Galaxy/Galaxy";
+
+Example:
+
+<div
+  style={{
+    width: "100%",
+    height: "600px",
+    position: "relative"
+  }}
+>
+  <Galaxy />
+</div>
+
+For the primary landing page use a configuration similar to:
+
+<Galaxy
+  mouseRepulsion={true}
+  mouseInteraction={true}
+  density={1.5}
+  glowIntensity={0.5}
+  saturation={0.8}
+  hueShift={220}
+  starSpeed={0.4}
+  twinkleIntensity={0.35}
+  rotationSpeed={0.08}
+  transparent={true}
+/>
+
+The Galaxy must remain a background layer, not interfere with content readability.
+
+Use it particularly on:
+
+- Landing page hero
+- Authentication screens
+- Empty states
+- Major section transitions
+- Possibly the simulation loading screen
+
+Do not put a heavy Galaxy WebGL canvas behind every dashboard card because that could hurt performance.
+
+Use appropriate z-index layering:
+
+Galaxy
+↓
+dark gradient overlay
+↓
+content
+
+Add subtle radial gradients above the Galaxy to ensure text remains readable.
+
+---
+
+5. LANDING PAGE
+
+Create a spectacular landing page.
+
+Hero section:
+
+Large headline:
+
+"Science isn't meant to be memorized."
+
+Then:
+
+"It's meant to be experienced."
+
+Supporting text:
+
+Explore Physics and Chemistry through interactive 3D simulations, virtual experiments, and visual explanations built for Class 11 and 12."
+
+Primary CTA:
+
+Explore the Lab
+
+Secondary CTA:
+
+Browse Concepts
+
+Hero visual:
+
+A large futuristic interactive 3D science visualization.
+
+Show floating concept cards around it:
+
+- ⚡ Electric Field
+- 🧲 Magnetism
+- ⚛️ Atomic Structure
+- 🌊 Waves
+- 🔭 Optics
+- 🧪 Chemical Reactions
+
+Use the Galaxy background behind the hero.
+
+---
+
+6. LANDING PAGE SECTIONS
+
+After the hero create:
+
+Explore Science Differently
+
+Three large cards:
+
+INTERACT
+
+Manipulate variables and observe what happens.
+
+VISUALIZE
+
+Turn invisible scientific concepts into interactive 3D models.
+
+EXPERIMENT
+
+Perform virtual experiments without needing a physical laboratory.
+
+---
+
+Explore by Subject
+
+Two large premium cards:
+
+Physics
+
+Icon: ⚡
+
+Description:
+
+"From projectile motion to quantum physics."
+
+Button:
+
+Explore Physics
+
+Chemistry
+
+Icon: ⚛️
+
+Description:
+
+"From atomic structure to organic reactions."
+
+Button:
+
+Explore Chemistry
+
+---
+
+7. FEATURED SIMULATIONS
+
+Create a horizontally scrollable premium simulation gallery.
+
+Example cards:
+
+Projectile Motion
+
+Launch an object and explore how velocity, angle, gravity and air resistance affect the trajectory.
+
+Electric Field
+
+Place charges in space and visualize the electric field.
+
+Molecular Geometry
+
+Build and rotate molecules in 3D.
+
+Lens Laboratory
+
+Move objects and lenses and observe image formation.
+
+Newton's Laws
+
+Experiment with force, mass and acceleration.
+
+Chemical Reaction Energy
+
+Explore activation energy and reaction pathways.
+
+Each card should contain a small animated visualization or 3D preview.
+
+Cards should have:
+
+- Preview
+- Subject
+- Class
+- Chapter
+- Difficulty
+- "Launch Simulation" button
+
+---
+
+8. MAIN APPLICATION DASHBOARD
+
+After clicking "Explore the Lab", show the main application.
+
+Layout:
+
+┌──────────────────────────────────────────────┐
+│ Science 3D                     Search   User │
+├──────────────┬───────────────────────────────┤
+│              │                               │
+│ Dashboard    │        Main Content           │
+│              │                               │
+│ Physics      │                               │
+│ Chemistry    │                               │
+│ Simulations  │                               │
+│ Experiments  │                               │
+│ Progress     │                               │
+│ Favorites    │                               │
+│              │                               │
+└──────────────┴───────────────────────────────┘
+
+Desktop:
+
+- Left sidebar
+- Main content
+- Optional right-side contextual panel
+
+Mobile:
+
+- Bottom navigation
+- Collapsible sidebar
+- Full-screen simulations
+
+---
+
+9. DASHBOARD
+
+Dashboard should show:
+
+Continue Learning
+
+Example:
+
+Electrostatics
+68% complete
+
+Resume button.
+
+Your Progress
+
+Display:
+
+- Physics progress
+- Chemistry progress
+- Simulations completed
+- Experiments completed
+- Quiz accuracy
+- Learning streak
+
+Recommended
+
+Dynamic recommendation cards.
+
+Example:
+
+«"You just learned Coulomb's law. Try Electric Field next."»
+
+---
+
+10. SUBJECT STRUCTURE
+
+Create:
+
+Physics
+ ├── Class 11
+ │   ├── Units & Measurements
+ │   ├── Motion in a Straight Line
+ │   ├── Motion in a Plane
+ │   ├── Laws of Motion
+ │   ├── Work, Energy & Power
+ │   ├── System of Particles
+ │   ├── Rotational Motion
+ │   ├── Gravitation
+ │   ├── Mechanical Properties of Solids
+ │   ├── Mechanical Properties of Fluids
+ │   ├── Thermal Properties of Matter
+ │   ├── Thermodynamics
+ │   ├── Kinetic Theory
+ │   └── Oscillations & Waves
+ │
+ └── Class 12
+     ├── Electric Charges & Fields
+     ├── Electrostatic Potential
+     ├── Current Electricity
+     ├── Moving Charges & Magnetism
+     ├── Magnetism & Matter
+     ├── Electromagnetic Induction
+     ├── Alternating Current
+     ├── Electromagnetic Waves
+     ├── Ray Optics
+     ├── Wave Optics
+     ├── Dual Nature
+     ├── Atoms
+     ├── Nuclei
+     └── Semiconductor Electronics
+
+Chemistry should similarly contain Class 11 and Class 12 chapters aligned with the current CBSE/NCERT structure.
+
+Keep curriculum data modular so chapters can be updated without rewriting the application.
+
+---
+
+11. CONCEPT PAGE
+
+Every concept needs a standardized structure.
+
+Example:
+
+Newton's Second Law
+
+[3D Simulation]
+
+Controls:
+Mass ─────────●────
+Force ────────●────
+Friction ─────●────
+
+Acceleration:
+4.2 m/s²
+
+[Reset] [Play] [Pause]
+
+────────────────────────
+
+What is happening?
+
+...
+
+Key relationship
+
+F = ma
+
+────────────────────────
+
+Experiment
+
+Can you make the acceleration exactly 5 m/s²?
+
+[Start Challenge]
+
+Every simulation should include:
+
+1. Interactive visualization
+2. Controls
+3. Real-time values
+4. Explanation
+5. Formula
+6. Experiment/challenge
+7. Reset
+8. Fullscreen
+9. Help
+10. Related concepts
+
+---
+
+12. 3D SIMULATION ENGINE
+
+Create a reusable simulation architecture.
+
+Do NOT hard-code every simulation into one giant component.
+
+Use something similar to:
+
+src/
+├── simulations/
+│   ├── physics/
+│   │   ├── projectile-motion/
+│   │   ├── newtons-laws/
+│   │   ├── collision/
+│   │   ├── gravitation/
+│   │   ├── shm/
+│   │   ├── waves/
+│   │   ├── electrostatics/
+│   │   ├── circuits/
+│   │   └── optics/
+│   │
+│   └── chemistry/
+│       ├── atomic-structure/
+│       ├── molecular-geometry/
+│       ├── hybridization/
+│       ├── gas-laws/
+│       ├── titration/
+│       └── thermochemistry/
+│
+├── components/
+├── pages/
+├── data/
+├── hooks/
+├── utils/
+└── lib/
+
+Create reusable systems for:
+
+- Camera controls
+- Orbit controls
+- Lighting
+- Labels
+- Measurements
+- Sliders
+- Graphs
+- Simulation controls
+- Fullscreen
+- Reset
+- Play/pause
+- Scientific notation
+- Units
+- Tooltips
+
+---
+
+13. PHYSICS SIMULATIONS
+
+The initial implementation should include several real interactive simulations.
+
+Prioritize:
+
+Projectile Motion
+
+Variables:
+
+- Initial velocity
+- Launch angle
+- Gravity
+- Initial height
+- Air resistance toggle
+
+Display:
+
+- Range
+- Maximum height
+- Flight time
+- Current velocity
+- Current acceleration
+
+Show trajectory in 3D.
+
+---
+
+Newton's Second Law
+
+Variables:
+
+- Mass
+- Force
+- Friction
+
+Display:
+
+- Net force
+- Acceleration
+- Velocity
+- Force vectors
+
+---
+
+Collision Simulator
+
+Show two objects/carts.
+
+Variables:
+
+- Mass
+- Initial velocity
+- Elastic/inelastic collision
+
+Display momentum before and after.
+
+---
+
+Gravitation
+
+Show two bodies.
+
+Variables:
+
+- Mass 1
+- Mass 2
+- Distance
+
+Visualize gravitational attraction.
+
+---
+
+SHM
+
+Create a beautiful 3D spring-mass system.
+
+Show:
+
+- Position
+- Velocity
+- Acceleration
+- Energy
+- Time graph
+
+---
+
+Electric Field
+
+Allow users to:
+
+- Add positive charge
+- Add negative charge
+- Move charges
+- Change charge magnitude
+
+Render electric field lines and vectors.
+
+---
+
+Ray Optics
+
+Create interactive:
+
+- Convex lens
+- Concave lens
+- Concave mirror
+- Convex mirror
+
+Allow users to move:
+
+- Object
+- Lens/mirror
+- Focal length
+
+Display:
+
+- Image position
+- Magnification
+- Image orientation
+
+---
+
+14. CHEMISTRY 3D SIMULATIONS
+
+Chemistry should use real 3D molecular visualization.
+
+Prioritize:
+
+Atomic Structure
+
+Interactive atom.
+
+Users can modify:
+
+- Protons
+- Neutrons
+- Electrons
+
+Display:
+
+- Atomic number
+- Mass number
+- Charge
+- Element
+
+---
+
+Electron Configuration
+
+Create an interactive orbital diagram.
+
+Show:
+
+- s
+- p
+- d
+- f
+
+Allow students to explore:
+
+- Aufbau principle
+- Hund's rule
+- Pauli exclusion principle
+
+---
+
+Molecular Geometry
+
+Create rotatable 3D models.
+
+Include:
+
+- Linear
+- Trigonal planar
+- Tetrahedral
+- Trigonal pyramidal
+- Bent
+- Trigonal bipyramidal
+- Octahedral
+
+Show bond angles and lone pairs.
+
+---
+
+Hybridization
+
+Interactive:
+
+- sp
+- sp²
+- sp³
+
+Visualize orbital orientation in 3D.
+
+---
+
+Gas Laws
+
+Create a molecular particle simulation.
+
+Allow changing:
+
+- Temperature
+- Pressure
+- Volume
+- Number of particles
+
+Animate molecular collisions.
+
+---
+
+Titration
+
+Create a virtual laboratory.
+
+Include:
+
+- Burette
+- Flask
+- Indicator
+- Solution
+- pH meter
+
+Students perform the experiment interactively.
+
+Show a live titration curve.
+
+---
+
+15. SIMULATION UX
+
+Every simulation should have a futuristic scientific control panel.
+
+Example:
+
+┌─────────────────────────────┐
+│ SIMULATION CONTROLS          │
+│                              │
+│ Mass                         │
+│ ───────────────●──── 5 kg   │
+│                              │
+│ Force                        │
+│ ────────●──────────── 20 N  │
+│                              │
+│ Gravity                      │
+│ ─────────────●──── 9.8 m/s² │
+│                              │
+│ [▶ Play] [↻ Reset]           │
+└─────────────────────────────┘
+
+Use glassmorphism.
+
+Controls must remain easy to understand.
+
+---
+
+16. AI TUTOR
+
+Create the UI architecture for an AI tutor, but keep the AI implementation modular.
+
+Add a floating button:
+
+Ask Science AI
+
+The assistant can eventually answer:
+
+- "Why does acceleration increase?"
+- "Explain this graph."
+- "Why is this molecule tetrahedral?"
+- "Give me a hint."
+- "Explain like I'm a beginner."
+
+The AI should reference the current simulation context.
+
+Example:
+
+Current simulation:
+Projectile Motion
+
+Current values:
+v = 20 m/s
+θ = 45°
+g = 9.8 m/s²
+
+The AI should know those values when answering.
+
+---
+
+17. SEARCH
+
+Implement global search.
+
+Search should find:
+
+- Chapters
+- Concepts
+- Simulations
+- Experiments
+
+Example:
+
+User searches:
+
+"electric field"
+
+Results:
+
+- Electric Charges & Fields
+- Electric Field Simulation
+- Coulomb's Law
+- Electric Potential
+
+---
+
+18. PROGRESS SYSTEM
+
+Track:
+
+- Concepts viewed
+- Simulations completed
+- Experiments completed
+- Challenges completed
+- Quiz scores
+- Favorites
+- Recent activity
+
+Display progress visually.
+
+Use charts sparingly.
+
+---
+
+19. FAVORITES
+
+Allow users to bookmark simulations.
+
+Example:
+
+⭐ Electric Field
+⭐ Projectile Motion
+⭐ Molecular Geometry
+
+Create a Favorites page.
+
+---
+
+20. RESPONSIVE DESIGN
+
+Mobile is important.
+
+On mobile:
+
+- Sidebar becomes bottom navigation
+- Simulation becomes full-width
+- Controls become bottom sheet
+- 3D viewport gets maximum space
+- Touch gestures must work
+- Sliders must be touch-friendly
+
+Support:
+
+- Touch rotation
+- Pinch zoom
+- Drag
+- Tap interaction
+
+---
+
+21. PERFORMANCE
+
+This is critical.
+
+Optimize WebGL rendering.
+
+Requirements:
+
+- Lazy-load simulations
+- Don't initialize WebGL until required
+- Dispose Three.js resources correctly
+- Dispose geometries
+- Dispose materials
+- Dispose textures
+- Stop animation loops when simulation is not visible
+- Avoid unnecessary React re-renders
+- Use requestAnimationFrame correctly
+- Use dynamic imports for heavy simulations
+- Keep Galaxy background limited to appropriate pages
+- Provide reduced-motion support
+
+Add a loading state:
+
+Preparing your laboratory...
+
+with a subtle scientific animation.
+
+---
+
+22. ACCESSIBILITY
+
+Include:
+
+- Keyboard navigation
+- Visible focus states
+- Accessible buttons
+- Tooltips
+- Proper contrast
+- Reduced motion
+- Screen-reader labels
+
+Never rely only on color to communicate information.
+
+---
+
+23. ERROR STATES
+
+Create polished states for:
+
+- Simulation failed to load
+- WebGL unavailable
+- Slow device
+- Network unavailable
+- Empty search
+- No favorites
+- No progress yet
+
+Example:
+
+3D engine unavailable
+
+"Your browser couldn't initialize WebGL. Try enabling hardware acceleration or using a modern browser."
+
+Provide:
+
+Retry
+
+---
+
+24. NAVIGATION
+
+Main navigation:
+
+Science 3D
+
+Dashboard
+Physics
+Chemistry
+Simulations
+Experiments
+Progress
+Favorites
+
+────────────────
+Settings
+About
+
+Top bar:
+
+- Search
+- Notifications
+- Profile
+- Theme toggle
+
+---
+
+25. REACT BITS INTEGRATION
+
+Use React Bits components wherever they genuinely improve the interface.
+
+Do not randomly add animations.
+
+Prioritize:
+
+- Galaxy
+- Text reveal effects
+- Magnetic buttons
+- Spotlight effects
+- Animated cards
+- Smooth transitions
+- Modern navigation effects
+
+If additional React Bits components are needed, consult the React Bits library/documentation and choose components that fit the futuristic scientific aesthetic.
+
+The Galaxy component is mandatory.
+
+---
+
+26. DESIGN LANGUAGE
+
+Use a consistent visual system.
+
+Typography:
+
+- Modern sans-serif
+- Strong large headings
+- Clean body text
+- Monospace font for numerical scientific values
+
+Examples:
+
+9.81 m/s²
+6.67 × 10⁻¹¹ N·m²/kg²
+F = ma
+ΔH = Hproducts − Hreactants
+
+Scientific values should feel like laboratory instrumentation.
+
+---
+
+27. MICRO-INTERACTIONS
+
+Add subtle interactions:
+
+- Cards lift slightly on hover
+- Buttons have magnetic/hover response
+- Active navigation glows subtly
+- Numbers animate when values change
+- Simulation controls smoothly interpolate
+- Page transitions are subtle
+- 3D objects react naturally
+- Loading states feel intentional
+
+Avoid excessive animations.
+
+---
+
+28. LANDING PAGE HERO EXPERIENCE
+
+The first screen should immediately communicate:
+
+This is not a normal education website.
+
+When the user moves the mouse:
+
+- Galaxy responds
+- Hero elements subtly move
+- 3D scientific object rotates slightly
+- Cards react
+
+The first impression should feel similar to a premium technology/science product launch page.
+
+---
+
+29. DATA ARCHITECTURE
+
+Keep curriculum data separate from UI.
+
+Example:
+
+interface Concept {
+  id: string;
+  title: string;
+  subject: "physics" | "chemistry";
+  classLevel: 11 | 12;
+  chapter: string;
+  description: string;
+  difficulty: "beginner" | "intermediate" | "advanced";
+  simulationType?: string;
+  tags: string[];
+}
+
+Simulation metadata should be data-driven.
+
+This should allow new simulations to be added without rebuilding the navigation system.
+
+---
+
+30. MVP PRIORITY
+
+Do not attempt to build every Class 11 and Class 12 simulation immediately.
+
+Build a polished MVP first.
+
+MVP should include:
+
+Physics
+
+1. Projectile Motion
+2. Newton's Second Law
+3. Collision
+4. Gravitation
+5. SHM
+6. Electric Field
+7. Ray Optics
+
+Chemistry
+
+1. Atomic Structure
+2. Electron Configuration
+3. Molecular Geometry
+4. Hybridization
+5. Gas Laws
+6. Titration
+
+Make these simulations actually interactive, not static mockups.
+
+---
+
+31. IMPORTANT IMPLEMENTATION RULE
+
+Do not create fake functionality.
+
+If something cannot yet be implemented, create a clean placeholder architecture rather than pretending it works.
+
+Buttons should either:
+
+- Work
+- Navigate somewhere meaningful
+- Clearly show "Coming Soon"
+
+Do not create dead buttons that appear functional.
+
+---
+
+32. FINAL QUALITY BAR
+
+The final application should feel like:
+
+"Apple-designed virtual science laboratory."
+
+Not:
+
+"school project dashboard."
+
+Prioritize:
+
+- Excellent typography
+- Excellent spacing
+- Strong visual hierarchy
+- High-quality 3D visualization
+- Smooth interactions
+- Scientific accuracy
+- Performance
+- Mobile usability
+- Consistent design
+
+The application should be visually impressive even before the user launches a simulation.
+
+Most importantly:
+
+The 3D simulations are the product.
+
+Do not let the dashboard/UI become more important than the actual scientific experience.
+
+Build the application so that adding the next 100+ Physics and Chemistry simulations later is straightforward.
