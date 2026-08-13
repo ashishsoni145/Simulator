@@ -1,0 +1,930 @@
+You are taking over an existing React/TypeScript project called Science 3D.
+
+The project is an interactive 3D Physics and Chemistry learning platform for Class 11 and Class 12.
+
+GitHub/Copilot has already created the initial implementation. Your job is to inspect the entire existing codebase first, understand what has actually been implemented, then improve and complete it without unnecessarily rewriting working code.
+
+---
+
+1. FIRST: AUDIT THE PROJECT
+
+Before making changes:
+
+1. Inspect the complete repository structure.
+2. Inspect "package.json".
+3. Identify the framework and build system.
+4. Inspect all existing pages/components.
+5. Identify existing 3D/simulation components.
+6. Identify existing routing.
+7. Identify existing styling/design system.
+8. Identify existing state management.
+9. Identify existing data models.
+10. Identify broken, incomplete, placeholder, duplicated, or dead functionality.
+11. Run the application.
+12. Run the existing build.
+13. Fix any compilation/runtime errors you discover.
+
+Do NOT immediately replace the existing architecture.
+
+Reuse good existing code.
+
+---
+
+2. PRODUCT GOAL
+
+The application should become a premium platform called:
+
+Science 3D
+
+Tagline:
+
+See the science. Interact with it. Understand it.
+
+The product is intended to eventually contain interactive 3D artifacts for essentially all important Class 11 and Class 12 Physics and Chemistry concepts.
+
+The central principle is:
+
+«The simulation is the product.»
+
+The UI should support the simulations rather than becoming a generic education dashboard.
+
+---
+
+3. VISUAL DIRECTION
+
+Upgrade the current interface into a premium futuristic scientific interface.
+
+Design language:
+
+- Dark
+- Space-inspired
+- Futuristic
+- Scientific
+- Minimal
+- Glassmorphism
+- Subtle neon accents
+- High-quality typography
+- Strong visual hierarchy
+- Smooth micro-interactions
+
+Avoid:
+
+- Generic AI-dashboard appearance
+- Excessive gradients
+- Excessive glowing borders
+- Overly colorful cards
+- Childish educational design
+- Huge amounts of unnecessary animation
+
+The final result should feel like a serious technology product / virtual laboratory.
+
+---
+
+4. GALAXY BACKGROUND
+
+Integrate the React Bits Galaxy component.
+
+Dependency:
+
+npm install ogl
+
+Use the supplied JavaScript + CSS Galaxy implementation.
+
+Create/reuse:
+
+src/components/Galaxy/Galaxy.jsx
+src/components/Galaxy/Galaxy.css
+
+The Galaxy component should support the provided props.
+
+Use approximately:
+
+<Galaxy
+  mouseRepulsion={true}
+  mouseInteraction={true}
+  density={1.5}
+  glowIntensity={0.5}
+  saturation={0.8}
+  hueShift={220}
+  starSpeed={0.4}
+  twinkleIntensity={0.35}
+  rotationSpeed={0.08}
+  transparent={true}
+/>
+
+Use Galaxy selectively:
+
+- Landing page hero
+- Authentication
+- Major empty/loading states
+- Selected high-impact sections
+
+Do NOT render a heavy Galaxy canvas behind every dashboard component.
+
+Make sure WebGL resources are properly cleaned up.
+
+---
+
+5. LANDING PAGE
+
+Inspect the current landing page.
+
+If it is incomplete, redesign it.
+
+Hero:
+
+Science isn't meant to be memorized.
+
+It's meant to be experienced.
+
+Supporting text:
+
+Explore Physics and Chemistry through interactive 3D simulations, virtual experiments, and visual explanations built for Class 11 and 12.
+
+Primary button:
+
+Explore the Lab
+
+Secondary button:
+
+Browse Concepts
+
+The hero should contain:
+
+- Galaxy background
+- Futuristic scientific visual
+- Subtle floating concept indicators
+- Strong typography
+- Excellent responsive behavior
+
+---
+
+6. MAIN NAVIGATION
+
+Create/refine navigation around:
+
+- Dashboard
+- Physics
+- Chemistry
+- Simulations
+- Experiments
+- Progress
+- Favorites
+
+Top bar:
+
+- Search
+- Profile
+- Settings/theme
+- Mobile navigation
+
+Desktop:
+
+- Sidebar
+
+Mobile:
+
+- Bottom navigation or collapsible navigation
+
+---
+
+7. CURRICULUM STRUCTURE
+
+Use a scalable data-driven architecture.
+
+Physics:
+
+Class 11
+- Units & Measurements
+- Motion in a Straight Line
+- Motion in a Plane
+- Laws of Motion
+- Work, Energy & Power
+- System of Particles
+- Rotational Motion
+- Gravitation
+- Mechanical Properties of Solids
+- Mechanical Properties of Fluids
+- Thermal Properties of Matter
+- Thermodynamics
+- Kinetic Theory
+- Oscillations
+- Waves
+
+Class 12
+- Electric Charges & Fields
+- Electrostatic Potential & Capacitance
+- Current Electricity
+- Moving Charges & Magnetism
+- Magnetism & Matter
+- Electromagnetic Induction
+- Alternating Current
+- Electromagnetic Waves
+- Ray Optics
+- Wave Optics
+- Dual Nature
+- Atoms
+- Nuclei
+- Semiconductor Electronics
+
+Chemistry should similarly contain Class 11 and Class 12 curriculum data.
+
+Do not hard-code chapter navigation into individual UI components.
+
+Use structured data.
+
+---
+
+8. SIMULATION ARCHITECTURE
+
+This is one of the most important tasks.
+
+Create a reusable simulation architecture.
+
+Do NOT create one giant "Simulation.tsx" file.
+
+Prefer something similar to:
+
+src/
+  simulations/
+    physics/
+      projectile-motion/
+      newtons-second-law/
+      collision/
+      gravitation/
+      shm/
+      electric-field/
+      ray-optics/
+
+    chemistry/
+      atomic-structure/
+      electron-configuration/
+      molecular-geometry/
+      hybridization/
+      gas-laws/
+      titration/
+
+  components/
+    simulation/
+      SimulationShell
+      SimulationControls
+      SimulationToolbar
+      SimulationInfo
+      SimulationGraph
+      SimulationLegend
+      SimulationFullscreen
+      SimulationLoading
+      SimulationError
+
+Adapt this to the existing project rather than blindly creating duplicates.
+
+---
+
+9. 3D TECHNOLOGY
+
+If the project already uses Three.js:
+
+Use:
+
+- Three.js
+- React Three Fiber
+- @react-three/drei
+
+If these are missing and needed, install them.
+
+Use proper:
+
+- Canvas
+- Camera
+- Lights
+- OrbitControls
+- Materials
+- Geometry
+- Animation loops
+
+Avoid unnecessary external 3D libraries.
+
+---
+
+10. IMPLEMENT REAL SIMULATIONS
+
+Do not leave the MVP as static cards.
+
+Implement genuinely interactive simulations.
+
+Prioritize these first.
+
+Physics
+
+1. Projectile Motion
+
+Controls:
+
+- Initial velocity
+- Launch angle
+- Gravity
+- Initial height
+- Air resistance
+
+Display:
+
+- Range
+- Maximum height
+- Flight time
+- Current velocity
+- Current acceleration
+
+Render a real trajectory.
+
+---
+
+2. Newton's Second Law
+
+Controls:
+
+- Mass
+- Applied force
+- Friction
+
+Calculate:
+
+- Net force
+- Acceleration
+- Velocity
+
+Show force vectors.
+
+---
+
+3. Collision
+
+Two interactive objects.
+
+Controls:
+
+- Mass
+- Velocity
+- Collision type
+
+Support:
+
+- Elastic
+- Perfectly inelastic
+
+Show momentum before/after.
+
+---
+
+4. Gravitation
+
+Two bodies.
+
+Controls:
+
+- Mass 1
+- Mass 2
+- Distance
+
+Show:
+
+- Gravitational force
+- Force vectors
+- Distance
+
+---
+
+5. SHM
+
+Create a proper spring-mass simulation.
+
+Show:
+
+- Position
+- Velocity
+- Acceleration
+- Energy
+- Time
+
+Include a graph.
+
+---
+
+6. Electric Field
+
+Allow:
+
+- Positive charges
+- Negative charges
+- Charge magnitude
+- Charge position
+
+Show electric field vectors/lines.
+
+---
+
+7. Ray Optics
+
+Support at least one interactive lens/mirror system.
+
+Allow:
+
+- Object movement
+- Focal length changes
+
+Show:
+
+- Image position
+- Magnification
+- Orientation
+
+---
+
+11. CHEMISTRY SIMULATIONS
+
+Implement:
+
+Atomic Structure
+
+Interactive atom.
+
+Change:
+
+- Protons
+- Neutrons
+- Electrons
+
+Calculate:
+
+- Atomic number
+- Mass number
+- Charge
+
+---
+
+Electron Configuration
+
+Visual orbital boxes.
+
+Show:
+
+- Aufbau principle
+- Hund's rule
+- Pauli exclusion
+
+---
+
+Molecular Geometry
+
+Use actual 3D models.
+
+Support:
+
+- Linear
+- Bent
+- Trigonal planar
+- Tetrahedral
+- Trigonal pyramidal
+- Trigonal bipyramidal
+- Octahedral
+
+Allow:
+
+- Rotate
+- Zoom
+- Change lone pairs/bonded pairs
+
+---
+
+Hybridization
+
+Visualize:
+
+- sp
+- sp²
+- sp³
+
+Show orbital orientation.
+
+---
+
+Gas Laws
+
+Particle simulation.
+
+Controls:
+
+- Temperature
+- Pressure
+- Volume
+- Number of particles
+
+Show molecular movement and collisions.
+
+---
+
+Titration
+
+Create a virtual titration experiment.
+
+Include:
+
+- Burette
+- Flask
+- Indicator
+- Solution
+- pH
+- Titration curve
+
+---
+
+12. SIMULATION UI
+
+Every simulation should have a consistent shell.
+
+Example:
+
+┌─────────────────────────────────────────────┐
+│ Projectile Motion                 Fullscreen│
+├───────────────────────────┬─────────────────┤
+│                           │ CONTROLS        │
+│                           │                 │
+│      3D SIMULATION        │ Velocity        │
+│                           │ ─────●────      │
+│                           │                 │
+│                           │ Angle           │
+│                           │ ───────●──      │
+│                           │                 │
+│                           │ Gravity         │
+│                           │ ─────●────      │
+│                           │                 │
+│                           │ ▶ Play  ↻ Reset │
+├───────────────────────────┴─────────────────┤
+│ Range: 40.8m | Height: 10.2m | Time: 4.1s  │
+└─────────────────────────────────────────────┘
+
+Use responsive layouts.
+
+On mobile:
+
+- Simulation gets priority
+- Controls become a bottom sheet
+- Touch gestures work properly
+
+---
+
+13. SCIENTIFIC ACCURACY
+
+Do not fake physics.
+
+Use proper equations and calculations.
+
+Keep simulation calculations separated from rendering code.
+
+For example:
+
+physics/
+  projectile.ts
+  collision.ts
+  gravitation.ts
+  shm.ts
+
+This allows calculations to be tested independently.
+
+Add reasonable unit handling.
+
+Use scientific notation where appropriate.
+
+---
+
+14. GRAPHS
+
+Create reusable graph components.
+
+Useful for:
+
+- Position vs time
+- Velocity vs time
+- Acceleration vs time
+- Energy
+- Force
+- Titration curves
+- Gas relationships
+
+Graphs should update in real time when simulation parameters change.
+
+Do not use graphs merely as decoration.
+
+---
+
+15. SIMULATION CONTROLS
+
+Create reusable:
+
+- Sliders
+- Numeric inputs
+- Toggle switches
+- Play/pause
+- Reset
+- Step forward
+- Fullscreen
+- Camera reset
+
+Controls should show units.
+
+Example:
+
+Mass
+5.00 kg
+
+Force
+20.0 N
+
+Acceleration
+4.00 m/s²
+
+Values should update smoothly.
+
+---
+
+16. PERFORMANCE
+
+This application will eventually contain hundreds of 3D simulations.
+
+Therefore:
+
+- Lazy-load simulations
+- Dynamically import heavy components
+- Do not initialize every WebGL canvas on page load
+- Dispose Three.js geometries/materials/textures
+- Stop animation loops when components unmount
+- Avoid unnecessary React state updates per frame
+- Use refs for high-frequency animation state
+- Use requestAnimationFrame appropriately
+- Avoid expensive DOM updates every frame
+- Optimize mobile rendering
+- Respect "prefers-reduced-motion"
+
+---
+
+17. MOBILE
+
+Test responsive layouts.
+
+The application must remain usable on phones.
+
+Important:
+
+- Touch rotation
+- Pinch zoom
+- Touch sliders
+- Bottom-sheet controls
+- Fullscreen simulation
+- Responsive cards
+- No horizontal overflow
+
+---
+
+18. SEARCH
+
+Implement global search.
+
+Search:
+
+- Subjects
+- Classes
+- Chapters
+- Concepts
+- Simulations
+
+Example:
+
+Search:
+
+"electric field"
+
+Results:
+
+- Electric Charges & Fields
+- Electric Field Simulation
+- Coulomb's Law
+- Electric Potential
+
+---
+
+19. PROGRESS
+
+Create a scalable progress system.
+
+Track:
+
+- Concepts viewed
+- Simulations completed
+- Experiments completed
+- Challenges completed
+- Quiz scores
+- Favorites
+- Recently viewed
+
+For now, local storage is acceptable if no backend exists.
+
+Keep the storage layer abstract so Supabase can be added later.
+
+---
+
+20. FAVORITES
+
+Users should be able to favorite simulations.
+
+Use persistent local state.
+
+Add:
+
+- Favorite button
+- Favorites page
+- Empty state
+- Remove favorite
+
+---
+
+21. AI TUTOR ARCHITECTURE
+
+Create the UI but don't fabricate an AI backend.
+
+Add:
+
+Ask Science AI
+
+The assistant should eventually understand the active simulation.
+
+For example:
+
+Current simulation:
+Projectile Motion
+
+Velocity:
+20 m/s
+
+Angle:
+45°
+
+Gravity:
+9.8 m/s²
+
+Structure the code so an AI API can later receive this context.
+
+If there is no AI API configured, clearly show an appropriate placeholder rather than pretending AI works.
+
+---
+
+22. LOADING EXPERIENCE
+
+Create a premium loading experience.
+
+Text:
+
+Preparing your laboratory...
+
+Use subtle scientific animation.
+
+For simulation loading:
+
+- Loading progress if available
+- Skeleton UI
+- Never leave a blank screen
+
+---
+
+23. ERROR HANDLING
+
+Handle:
+
+- WebGL unavailable
+- Simulation errors
+- Failed lazy imports
+- Invalid parameters
+- Empty states
+
+Provide useful recovery actions.
+
+Example:
+
+3D engine unavailable
+
+"Your browser could not initialize WebGL."
+
+Button:
+
+Retry
+
+---
+
+24. ACCESSIBILITY
+
+Support:
+
+- Keyboard navigation
+- Focus states
+- Accessible labels
+- Good contrast
+- Reduced motion
+- Screen reader labels
+
+Do not depend solely on color.
+
+---
+
+25. CODE QUALITY
+
+Follow strong TypeScript practices.
+
+Avoid:
+
+any
+
+unless absolutely necessary.
+
+Use:
+
+- Interfaces/types
+- Reusable hooks
+- Small components
+- Clear naming
+- Separation of concerns
+- Proper error handling
+
+Remove:
+
+- Dead code
+- Unused imports
+- Duplicate components
+- Debug logs
+- Temporary placeholders where real functionality now exists
+
+---
+
+26. DO NOT DESTROY WORKING FEATURES
+
+Important:
+
+Do not blindly rewrite the existing application.
+
+First understand what Copilot has already implemented.
+
+If an existing implementation is good:
+
+keep it and improve it.
+
+Only replace code when there is a clear technical/design reason.
+
+---
+
+27. FINAL TESTING
+
+After implementation:
+
+Run:
+
+npm run build
+
+and the project's available lint/type-check/test commands.
+
+Fix all:
+
+- TypeScript errors
+- Build errors
+- Runtime errors
+- Broken imports
+- Missing dependencies
+- Console errors
+
+Check:
+
+- Desktop
+- Mobile
+- Landing page
+- Navigation
+- Search
+- Simulation loading
+- Simulation controls
+- Fullscreen
+- Favorites
+- Progress
+- Galaxy background
+
+---
+
+28. FINAL OUTPUT
+
+When finished, provide a concise summary containing:
+
+1. What you found in the existing project.
+2. What you changed.
+3. Which simulations actually work.
+4. Which features remain placeholders.
+5. Dependencies added.
+6. Any architectural decisions.
+7. Any remaining issues.
+
+Most importantly, do not claim a feature works unless you actually implemented and tested it.
+
+The goal is to turn the Copilot-generated prototype into a real, scalable, polished Science 3D application, while preserving useful existing work.
