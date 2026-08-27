@@ -1,0 +1,378 @@
+/*
+ * The simulation stage and its measurement layer.
+ *
+ * Kept separate from index.css because it is a self-contained system: an
+ * orthographic 3D canvas with a pixel-aligned SVG instrument layer over it. The
+ * tone classes set one custom property and every instrument reads it, so adding a
+ * colour never means touching a dozen selectors.
+ */
+
+.scene-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 6px);
+  background:
+    radial-gradient(circle at 50% 120%, rgba(96, 165, 250, 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(4, 9, 20, 0.6) 0%, rgba(3, 6, 14, 0.9) 100%);
+  border: 1px solid var(--line);
+  touch-action: pan-y;
+}
+
+.scene-frame canvas {
+  display: block;
+  outline: none;
+}
+
+/* The instrument layer. Sits exactly over the canvas in pixel coordinates and
+   never intercepts a pointer — the scene below stays interactive. */
+.scene-frame__measure {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.scene-frame__hud {
+  position: absolute;
+  inset: 12px 12px auto 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.scene-frame__hud > * {
+  pointer-events: auto;
+}
+
+.scene-frame__orbit-toggle {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 7px 14px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  background: var(--panel-strong);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  transition: border-color 140ms ease, color 140ms ease;
+}
+
+.scene-frame__orbit-toggle:hover {
+  border-color: rgba(125, 211, 252, 0.6);
+  color: var(--cyan);
+}
+
+.scene-frame__orbit-note {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 6px 14px;
+  max-width: min(88%, 30rem);
+  text-align: center;
+  font-size: 0.74rem;
+  color: var(--muted);
+  background: var(--panel-strong);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+/* ── WebGL fallback ─────────────────────────────────────────────────────────
+   Rendered when the browser cannot give us a context, so the page degrades to
+   "no 3D" rather than "blank rectangle". */
+
+.scene-frame__fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  padding: 28px;
+}
+
+.scene-frame__fallback-inner {
+  max-width: 34rem;
+  text-align: center;
+}
+
+.scene-frame__fallback-title {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.scene-frame__fallback-body {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.scene-frame__fallback-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--subtle);
+}
+
+/* ── Measurement instruments ────────────────────────────────────────────────
+   One tone variable drives stroke and fill for every part of an instrument. */
+
+.measure {
+  --measure-tone: var(--cyan);
+  --measure-soft: rgba(125, 211, 252, 0.16);
+}
+
+.measure--cyan {
+  --measure-tone: var(--cyan);
+  --measure-soft: rgba(125, 211, 252, 0.16);
+}
+
+.measure--green {
+  --measure-tone: var(--green);
+  --measure-soft: rgba(142, 247, 193, 0.16);
+}
+
+.measure--amber {
+  --measure-tone: var(--amber);
+  --measure-soft: rgba(250, 204, 21, 0.16);
+}
+
+.measure--violet {
+  --measure-tone: var(--violet);
+  --measure-soft: rgba(167, 139, 250, 0.18);
+}
+
+.measure--danger {
+  --measure-tone: var(--danger);
+  --measure-soft: rgba(251, 113, 133, 0.16);
+}
+
+.measure--muted {
+  --measure-tone: var(--muted);
+  --measure-soft: rgba(145, 163, 184, 0.14);
+}
+
+/* Every label gets a dark halo drawn behind the glyphs, so a number stays
+   readable whether it lands on empty sky or on a bright moving object. */
+.measure text {
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  paint-order: stroke fill;
+  stroke: rgba(3, 5, 11, 0.82);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  user-select: none;
+}
+
+.measure__label {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--measure-tone);
+}
+
+.measure__sublabel {
+  font-size: 10.5px;
+  font-weight: 500;
+  fill: var(--muted);
+}
+
+.measure__value {
+  font-size: 12.5px;
+  font-weight: 700;
+  fill: var(--measure-tone);
+}
+
+.measure__caption {
+  font-size: 10.5px;
+  font-weight: 550;
+  fill: var(--muted);
+}
+
+.measure__tick-label {
+  font-size: 10px;
+  font-weight: 550;
+  fill: var(--subtle);
+  stroke-width: 2.5px;
+}
+
+.measure__axis-label {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  fill: var(--muted);
+}
+
+.measure__gridline {
+  stroke: rgba(148, 213, 255, 0.07);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.measure__axis {
+  stroke: rgba(148, 213, 255, 0.34);
+  stroke-width: 1.25;
+  shape-rendering: crispEdges;
+}
+
+.measure__tick {
+  stroke: rgba(148, 213, 255, 0.34);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.measure__tick--major {
+  stroke: rgba(148, 213, 255, 0.62);
+  stroke-width: 1.4;
+}
+
+.measure__dot {
+  fill: var(--measure-tone);
+  stroke: rgba(3, 5, 11, 0.8);
+  stroke-width: 1.5;
+}
+
+.measure__leader {
+  stroke: var(--measure-tone);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+  opacity: 0.7;
+}
+
+/* Ruler ------------------------------------------------------------------- */
+
+.measure--ruler .measure__ruler-spine {
+  stroke: var(--measure-tone);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.measure--ruler .measure__tick {
+  stroke: var(--measure-tone);
+  opacity: 0.75;
+}
+
+.measure--ruler .measure__tick--major {
+  opacity: 1;
+  stroke-width: 1.6;
+}
+
+.measure--ruler .measure__tick-label {
+  fill: var(--measure-tone);
+  opacity: 0.9;
+}
+
+.measure--ruler .measure__caption {
+  fill: var(--measure-tone);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+/* Dimension line ---------------------------------------------------------- */
+
+.measure__extension {
+  stroke: var(--measure-tone);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.55;
+}
+
+.measure__dimension-line {
+  stroke: var(--measure-tone);
+  stroke-width: 1.5;
+}
+
+/* Protractor -------------------------------------------------------------- */
+
+.measure__arc {
+  fill: none;
+  stroke: var(--measure-tone);
+  stroke-width: 1.2;
+  opacity: 0.55;
+}
+
+.measure__wedge {
+  fill: var(--measure-soft);
+  stroke: var(--measure-tone);
+  stroke-width: 1;
+  stroke-opacity: 0.6;
+}
+
+.measure__reference {
+  stroke: rgba(148, 213, 255, 0.45);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.measure__arm {
+  stroke: var(--measure-tone);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.measure--protractor .measure__tick {
+  stroke: var(--measure-tone);
+  opacity: 0.6;
+}
+
+.measure--protractor .measure__tick--major {
+  opacity: 0.95;
+}
+
+.measure--protractor .measure__tick-label {
+  fill: var(--measure-tone);
+  opacity: 0.85;
+  font-size: 9.5px;
+}
+
+/* Vectors ----------------------------------------------------------------- */
+
+.measure__shaft {
+  stroke: var(--measure-tone);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.measure__shaft--dashed {
+  stroke-dasharray: 5 4;
+}
+
+.measure__head {
+  fill: var(--measure-tone);
+}
+
+.measure__component {
+  stroke: var(--measure-tone);
+  stroke-width: 1.1;
+  stroke-dasharray: 4 3;
+  opacity: 0.6;
+}
+
+/* Paths ------------------------------------------------------------------- */
+
+.measure__path {
+  stroke: var(--measure-tone);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.measure__path--dashed {
+  stroke-dasharray: 6 5;
+}
+
+.measure__path--ghost {
+  opacity: 0.28;
+  stroke-width: 1.5;
+}
